@@ -1,0 +1,95 @@
+<header>
+  <app-navbar></app-navbar>
+</header>
+<section class="catalog">
+  <section class="catalog_cnt">
+    <h1 class="title">Car Catalog</h1>
+    <form [formGroup]="findForm" class="form_search">
+      <section class="input_cnt">
+        <input
+          type="text"
+          class="input_cnt-input"
+          id="findPatent"
+          placeholder="Buscar por una patente existente"
+          formControlName="findPatent"
+          minLength="6"
+          maxLength="6"
+          name="findPatent"
+          (input)="searchPatent($event)"
+        />
+      </section>
+    </form>
+    <section class="list">
+      <section
+        class="list_cnt"
+        *ngFor="let item of carDataFiltered; let i = index"
+      >
+        <figure class="image_cnt">
+          <img src="{{ item.image }}" alt="foto_auto" class="image_cnt-img" />
+        </figure>
+        <article class="data_cnt">
+          <p class="data_cnt-text">
+            Marca: <span class="item">{{ item.brand }}</span>
+          </p>
+          <p class="data_cnt-text">
+            Modelo: <span class="item">{{ item.model }}</span>
+          </p>
+          <p class="data_cnt-text">
+            Color: <span class="item">{{ item.color }}</span>
+          </p>
+          <p class="data_cnt-text">
+            Patente: <span class="item">{{ item.patent }}</span>
+          </p>
+          <p class="data_cnt-text text--precio">
+            Precio:
+            <span class="item">{{ item.price | replaceCurrency }}$</span>
+          </p>
+          <p class="data_cnt-text text--precio">
+            Fecha de creación:
+            <span class="item">{{ item.date | date: "short" }}</span>
+          </p>
+          <article class="btn_cnt">
+            <button
+              class="btn_cnt-btn_edit"
+              (click)="showModalHandleOptions(typeModalEnum.EDIT, i)"
+            >
+              Editar
+            </button>
+            <button
+              class="btn_cnt-btn_delete"
+              (click)="showModalDeleteAutos(true, i)"
+            >
+              Eliminar
+            </button>
+          </article>
+        </article>
+      </section>
+    </section>
+    <article class="btn_cnt">
+      <button
+        class="btn_create"
+        (click)="showModalHandleOptions(typeModalEnum.CREATE)"
+      >
+        Crear un nuevo registro
+      </button>
+    </article>
+  </section>
+</section>
+
+<app-modal-handle-options-car
+  *ngIf="isModalCreate || isModalEdit"
+  (hideModal)="hideModalCreateEdit($event)"
+  (createCarLog)="createCar()"
+  (editCar)="EditCar()"
+  (cleanForm)="cleanCarForm()"
+  [carForm]="carForm"
+  [isModalEdit]="isModalEdit"
+  [isModalCreate]="isModalCreate"
+></app-modal-handle-options-car>
+
+<app-modal-delete-car
+  *ngIf="showModalDelete"
+  [carDataModal]="carDataModal"
+  (hideModalDelete)="hideModalDelete($event)"
+  (deleteCar)="doDeleteCar()"
+></app-modal-delete-car>

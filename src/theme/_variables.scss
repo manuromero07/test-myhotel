@@ -1,0 +1,28 @@
+$colors: (
+  primary: #da5f5c,
+  primary-optional: #381151,
+  primary-contrast: #5f4773,
+  primary-light: #a096ab,
+  primary-thin: #bbb4c3,
+  primary-thiner: #e8e8ee,
+  secondary: #fb417f,
+  dark: #000000,
+  light-gray: #f8f8fa,
+  white: #ffffff,
+  error: #b71c1c,
+  edit: #00838f,
+  light-cyan: #e0f7fa,
+  blue: #1a237e,
+);
+
+$fonts: (
+  ligth: 300,
+  regular: 400,
+  medium: 500,
+  bold: 600,
+  dark: 700,
+);
+
+$z-index: (
+  loading: 10,
+);

@@ -1,0 +1,20 @@
+@import "./variables";
+@import "./fonts";
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "CeraPro", sans-serif, Arial;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1;
+  color: map-get($colors, dark);
+  background-color: map-get($colors, light-gray);
+}
+
+button {
+  font-family: "CeraPro", sans-serif, Arial;
+}
