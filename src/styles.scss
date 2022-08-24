@@ -1,1 +1,8 @@
-/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/scss/bootstrap";
+@import "./theme/variables";
+@import "./theme/global";
+@import "assets/icons/style.css";
+
+* {
+  box-sizing: border-box;
+}

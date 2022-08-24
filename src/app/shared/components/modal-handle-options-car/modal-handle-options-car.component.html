@@ -1,0 +1,256 @@
+<section class="modal_create">
+  <section class="modal_create_cnt">
+    <header class="header_cnt">
+      <span class="icon-close icon" (click)="closeModal()"></span>
+      <p class="title" *ngIf="!isModalEdit">
+        Ingresa los datos del auto para crear un nuevo registro
+      </p>
+      <p class="title" *ngIf="isModalEdit">
+        Ingresa nuevamente los datos del registro a modificar
+      </p>
+    </header>
+    <form [formGroup]="carForm" class="form_create">
+      <section class="row"></section>
+      <section class="input_cnt">
+        <label class="input_cnt-label" for="patent">Patente: </label>
+        <input
+          type="text"
+          class="input_cnt-input input--patente"
+          id="patent"
+          placeholder="Ej:
+        HHHH45"
+          formControlName="patent"
+          maxLength="6"
+          minLength="6"
+          [ngClass]="{
+            'input--invalid':
+              (!!carForm.get('patent')?.errors?.['required'] &&
+                carForm.get('patent')?.touched) ||
+              (!!carForm.get('patent')?.errors?.['required'] && isSubmitted) ||
+              ((!!carForm.get('patent')?.errors?.['pattern'] ||
+                !!carForm.get('patent')?.errors?.['minlength']) &&
+                carForm.get('patent')?.touched)
+          }"
+        />
+
+        <div
+          *ngIf="
+            (!!carForm.get('patent')?.errors?.['required'] &&
+              carForm.get('patent')?.touched) ||
+            (!!carForm.get('patent')?.errors?.['required'] && !!isSubmitted)
+          "
+          class="error_text"
+        >
+          Por favor, introduce una patente
+        </div>
+        <div
+          *ngIf="
+            (!!carForm.get('patent')?.errors?.['pattern'] ||
+              !!carForm.get('patent')?.errors?.['minlength']) &&
+            carForm.get('patent')?.touched
+          "
+          class="error_text"
+        >
+          Por favor, introduce una patente válida, debe tener 2 numeros
+        </div>
+      </section>
+
+      <section class="input_cnt">
+        <label class="input_cnt-label" for="marca">Marca: </label>
+        <input
+          type="text"
+          class="input_cnt-input"
+          id="brand"
+          placeholder="Ej:
+        Toyota"
+          formControlName="brand"
+          minlength="2"
+          maxLength="20"
+          [ngClass]="{
+            'input--invalid':
+              (!!carForm.get('brand')?.errors?.['required'] && carForm.get('brand')?.touched) ||
+              (!!carForm.get('brand')?.errors?.['required'] && isSubmitted) ||
+              ((!!carForm.get('brand')?.errors?.['pattern'] ||
+                !!carForm.get('brand')?.errors?.['minlength']) &&
+                carForm.get('brand')?.touched)
+          }"
+        />
+
+        <div
+          *ngIf="
+            (!!carForm.get('brand')?.errors?.['required'] &&
+              carForm.get('brand')?.touched) ||
+            (!!carForm.get('brand')?.errors?.['required'] && !!isSubmitted)
+          "
+          class="error_text"
+        >
+          Por favor, introduce una marca
+        </div>
+        <div
+          *ngIf="
+            (!!carForm.get('brand')?.errors?.['pattern'] ||
+              !!carForm.get('brand')?.errors?.['minlength']) &&
+            carForm.get('brand')?.touched
+          "
+          class="error_text"
+        >
+          Por favor, introduce una marca válida
+        </div>
+      </section>
+
+      <section class="input_cnt">
+        <label class="input_cnt-label" for="model">Modelo: </label>
+        <input
+          type="text"
+          class="input_cnt-input"
+          id="model"
+          placeholder="Ej:
+        Prius"
+          formControlName="model"
+          minlength="2"
+          maxLength="20"
+          [ngClass]="{
+            'input--invalid':
+              (!!carForm.get('model')?.errors?.['required'] && carForm.get('model')?.touched) ||
+              (!!carForm.get('model')?.errors?.['required'] && isSubmitted) ||
+              ((!!carForm.get('model')?.errors?.['pattern'] ||
+                !!carForm.get('model')?.errors?.['minlength']) &&
+                carForm.get('model')?.touched)
+          }"
+        />
+
+        <div
+          *ngIf="
+            (!!carForm.get('model')?.errors?.['required'] &&
+              carForm.get('model')?.touched) ||
+            (!!carForm.get('model')?.errors?.['required'] && !!isSubmitted)
+          "
+          class="error_text"
+        >
+          Por favor, introduce un modelo
+        </div>
+        <div
+          *ngIf="
+            (!!carForm.get('model')?.errors?.['pattern'] ||
+              !!carForm.get('model')?.errors?.['minlength']) &&
+            carForm.get('model')?.touched
+          "
+          class="error_text"
+        >
+          Por favor, introduce un modelo válido
+        </div>
+      </section>
+
+      <section class="input_cnt">
+        <label class="input_cnt-label" for="color">Color: </label>
+        <input
+          type="text"
+          class="input_cnt-input"
+          id="color"
+          placeholder="Ej:
+        Azul"
+          formControlName="color"
+          minlength="2"
+          maxLength="20"
+          [ngClass]="{
+            'input--invalid':
+              (!!carForm.get('color')?.errors?.['required'] && carForm.get('color')?.touched) ||
+              (!!carForm.get('color')?.errors?.['required'] && isSubmitted) ||
+              ((!!carForm.get('color')?.errors?.['pattern'] ||
+                !!carForm.get('color')?.errors?.['minlength']) &&
+                carForm.get('color')?.touched)
+          }"
+        />
+
+        <div
+          *ngIf="
+            (!!carForm.get('color')?.errors?.['required'] && carForm.get('color')?.touched) ||
+            (!!carForm.get('color')?.errors?.['required'] && !!isSubmitted)
+          "
+          class="error_text"
+        >
+          Por favor, introduce un color
+        </div>
+
+        <div
+          *ngIf="
+            (!!carForm.get('color')?.errors?.['pattern'] ||
+              !!carForm.get('color')?.errors?.['minlength']) &&
+            carForm.get('color')?.touched
+          "
+          class="error_text"
+        >
+          Por favor, introduce una color válido
+        </div>
+      </section>
+
+      <section class="input_cnt">
+        <label class="input_cnt-label" for="precio">Precio: </label>
+        <input
+          type="text"
+          class="input_cnt-input"
+          id="price"
+          placeholder="Ej:
+        600000"
+          formControlName="price"
+          minlength="4"
+          maxLength="8"
+          [ngClass]="{
+            'input--invalid':
+              (!!carForm.get('price')?.errors?.['required'] && carForm.get('price')?.touched) ||
+              (!!carForm.get('price')?.errors?.['required'] && isSubmitted) ||
+              !!carForm.get('price')?.errors?.['pattern'] ||
+              (!!carForm.get('price')?.errors?.['minlength'] && carForm.get('precio')?.touched)
+          }"
+        />
+
+        <div
+          *ngIf="
+            (!!carForm.get('price')?.errors?.['required'] &&
+              carForm.get('price')?.touched) ||
+            (!!carForm.get('price')?.errors?.['required'] && !!isSubmitted)
+          "
+          class="error_text"
+        >
+          Por favor, introduce una precio
+        </div>
+        <div
+          *ngIf="
+            !!carForm.get('price')?.errors?.['pattern'] ||
+            (!!carForm.get('price')?.errors?.['minlength'] &&
+              carForm.get('price')?.touched)
+          "
+          class="error_text"
+        >
+          Por favor, introduce una precio válido
+        </div>
+      </section>
+
+      <section class="input_cnt">
+        <label class="input_cnt-label" for="precio">Imagen: </label>
+        <input
+          type="text"
+          class="input_cnt-input"
+          id="image"
+          placeholder="Ej:
+        url.jpg"
+          formControlName="image"
+          minlength="2"
+          maxLength="230"
+        />
+      </section>
+
+      <div class="btn_cnt">
+        <button class="btn_clean" (click)="cleanCarForm()">
+          Limpiar formulario
+        </button>
+        <button class="btn_create" (click)="createCar()" *ngIf="!isModalEdit">
+          Crear registro
+        </button>
+        <button class="btn_create" (click)="editAuto()" *ngIf="isModalEdit">
+          Editar registro
+        </button>
+      </div>
+    </form>
+  </section>
+</section>

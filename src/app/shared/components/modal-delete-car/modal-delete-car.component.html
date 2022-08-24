@@ -1,0 +1,36 @@
+<section class="modal_delete">
+  <section class="modal_delete_cnt">
+    <header class="header_cnt">
+      <span class="icon-close icon" (click)="closeModal()"></span>
+      <p class="title">
+        ¿Estas seguro que deseas eliminar el registro de este auto?
+      </p>
+    </header>
+    <section class="body_cnt">
+      <article class="text_cnt">
+        <p class="text_cnt-brand">{{ carDataModal.brand }} -</p>
+        <p class="text_cnt-model">{{ carDataModal.model }} -</p>
+        <p class="text_cnt-color">{{ carDataModal.color }}</p>
+      </article>
+      <figure class="image_cnt">
+        <img
+          src="{{ carDataModal.image }}"
+          alt="foto_auto"
+          class="image_cnt-img"
+        />
+      </figure>
+      <div class="price_cnt">
+        <p class="text_price">
+          Precio:
+          <span class="text_price-price"
+            >{{ carDataModal.price | replaceCurrency }}$</span
+          >
+        </p>
+      </div>
+    </section>
+    <div class="btn_cnt">
+      <button class="btn_cancel" (click)="closeModal()">Cancelar</button>
+      <button class="btn_delete" (click)="emitDeleteEvent()">Eliminar</button>
+    </div>
+  </section>
+</section>

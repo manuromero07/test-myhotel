@@ -1,0 +1,60 @@
+
+ // Color fondo modal.
+ $background-cnt: rgb(68, 117, 132, 0.8);
+ // Tamano icono animado.
+ $size-icon: 100px;
+ // ubicacion icono animacion.
+ $url-icon: '/assets/images/loading.svg';
+
+ .loading-cnt {
+    width: 100%;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    position: fixed;
+    background: $background-cnt;
+    overflow: hidden;
+    z-index: 99999;
+
+    .loading-content {
+        top: 50%;
+        left: 50%;
+        position: absolute;
+        transform: translate(-50%, -50%);
+        text-align: center;
+    }
+    .loading-title {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 22px;
+        letter-spacing: 0.014em;
+        color: #FFFFFF;
+        margin-top: 13px;
+    }
+    .loading-icon {
+        width: $size-icon;
+        height: $size-icon;
+        margin: 0 auto;
+        background: url(#{$url-icon});
+        background-size: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .loading-frame {
+        width: 100vw;
+        height: 100vh;
+        left: 0;
+        top: 0;
+        .loading-content {
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .loading-title {
+            width: 90vw;
+            font-weight: 400;
+        }
+    }
+}
