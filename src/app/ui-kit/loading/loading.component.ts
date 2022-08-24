@@ -3,10 +3,7 @@ import { Subscription } from 'rxjs';
 import { LoadingService } from '../../services/loading.service';
 
 /**
- * Componente que controla el despliegue del modal de carga.
- *
- * @author Manuel Romero
- * @version 1.0
+ * Component that handles the loading modal.
  */
 @Component({
   selector: 'app-loading',
@@ -15,24 +12,24 @@ import { LoadingService } from '../../services/loading.service';
 })
 export class LoadingComponent implements OnInit, OnDestroy {
   /**
-   * Atributo que gatilla el despliegue del modal de carga, si es mayor a cero.
+   * Attribute that triggers the loading modal if it's higher than 0.
    */
   show = 0;
 
   /**
-   * Suscripcion que escucha los cambios de estado.
+   * Subscription that listen to changes of states
    */
   private subscription!: Subscription;
 
   /**
-   * Constructor.
+   * Constructor of the component.
    * @constructor
-   * @param loadingService Servicio que escucha los cambios de estado.
+   * @param loadingService Service that listen to changes of state
    */
   constructor(private loadingService: LoadingService) {}
 
   /**
-   * Funcion de inicio del componente que suscribe para escuchar cambios de estado.
+   * Start the component subscription and listen to changes of state
    */
   ngOnInit(): void {
     this.subscription = this.loadingService.loadingState.subscribe((state) => {
@@ -41,7 +38,7 @@ export class LoadingComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Funcion de termino del componente termina la suscripcion al servicio.
+   * Method that ends the subscription
    */
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
