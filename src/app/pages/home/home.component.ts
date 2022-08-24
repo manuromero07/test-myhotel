@@ -33,6 +33,9 @@ export class HomeComponent implements OnInit {
    */
   carData: CarModel[] = [];
 
+  /**
+   * Data model for modal edit
+   */
   editDataModal: CarModel = {
     brand: '',
     model: '',
@@ -42,6 +45,9 @@ export class HomeComponent implements OnInit {
     price: 0,
   };
 
+  /**
+   * Data model for modal
+   */
   carDataModal: CarModel = {
     brand: '',
     color: '',
