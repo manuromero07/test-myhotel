@@ -68,7 +68,7 @@
         border-radius: 0.5rem;
         border: 1px solid map-get($colors, primary);
         background-color: map-get($colors, primary);
-        color: white;
+        color: map-get($colors, white);
         font-size: 0.875rem;
         font-weight: 500;
         cursor: pointer;
@@ -119,20 +119,19 @@
           text-align: justify;
           position: relative;
           display: flex;
-          align-items: flex-start;
-          justify-content: center;
+          align-items: center;
+          justify-content: flex-start;
+          flex-flow: column;
           padding: 0 1rem;
           flex-flow: column;
           &-text {
-            font-size: 1rem;
+            font-size: 1.125rem;
             font-weight: 500;
-            padding-left: 1rem;
             margin-bottom: 1rem;
             color: map-get($colors, primary);
             .item {
               color: black;
               font-weight: 300;
-              margin-left: 0.5rem;
             } //item
           } //text
           .btn_cnt {
@@ -148,7 +147,7 @@
               border-radius: 0.325rem;
               border: 1px solid map-get($colors, edit);
               background-color: map-get($colors, edit);
-              color: white;
+              color: map-get($colors, white);
               font-size: 0.825rem;
               font-weight: 500;
               transform: scale(1);
@@ -186,7 +185,7 @@
         border-radius: 0.5rem;
         border: 1px solid map-get($colors, primary);
         background-color: map-get($colors, primary);
-        color: white;
+        color: map-get($colors, white);
         font-size: 1.275rem;
         font-weight: 500;
         cursor: pointer;

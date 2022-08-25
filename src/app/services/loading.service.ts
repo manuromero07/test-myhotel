@@ -3,9 +3,6 @@ import { BehaviorSubject, Observable } from 'rxjs';
 
 /**
  * Services that handle the loading modal of the app.
- *
- * @author Manuel Romero
- * @version 1.0
  */
 @Injectable({ providedIn: 'root' })
 export class LoadingService {

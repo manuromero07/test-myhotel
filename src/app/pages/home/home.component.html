@@ -3,7 +3,7 @@
 </header>
 <section class="catalog">
   <section class="catalog_cnt">
-    <h1 class="title">Car Catalog</h1>
+    <h1 class="title">Catalogo de Autos</h1>
     <form [formGroup]="findForm" class="form_search">
       <section class="input_cnt">
         <input
@@ -19,35 +19,41 @@
         />
       </section>
     </form>
-    <section class="list">
+    <section class="list row">
       <section
-        class="list_cnt"
+        class="list_cnt col-md-6"
         *ngFor="let item of carDataFiltered; let i = index"
       >
         <figure class="image_cnt">
-          <img src="{{ item.image }}" alt="foto_auto" class="image_cnt-img" />
+          <img [src]="imgUrl(i)" alt="foto_auto" class="image_cnt-img" />
         </figure>
         <article class="data_cnt">
-          <p class="data_cnt-text">
-            Marca: <span class="item">{{ item.brand }}</span>
-          </p>
-          <p class="data_cnt-text">
-            Modelo: <span class="item">{{ item.model }}</span>
-          </p>
-          <p class="data_cnt-text">
-            Color: <span class="item">{{ item.color }}</span>
-          </p>
-          <p class="data_cnt-text">
-            Patente: <span class="item">{{ item.patent }}</span>
-          </p>
-          <p class="data_cnt-text text--precio">
-            Precio:
-            <span class="item">{{ item.price | replaceCurrency }}$</span>
-          </p>
-          <p class="data_cnt-text text--precio">
-            Fecha de creación:
-            <span class="item">{{ item.date | date: "short" }}</span>
-          </p>
+          <div class="row">
+            <p class="data_cnt-text col-md-6">
+              Marca: <span class="item">{{ item.brand }}</span>
+            </p>
+            <p class="data_cnt-text col-md-6">
+              Modelo: <span class="item">{{ item.model }}</span>
+            </p>
+          </div>
+          <div class="row">
+            <p class="data_cnt-text col-md-6">
+              Color: <span class="item">{{ item.color }}</span>
+            </p>
+            <p class="data_cnt-text col-md-6">
+              Patente: <span class="item">{{ item.patent }}</span>
+            </p>
+          </div>
+          <div class="row">
+            <p class="data_cnt-text col-md-12 text--precio">
+              Precio:
+              <span class="item">{{ item.price | replaceCurrency }}$</span>
+            </p>
+            <p class="data_cnt-text col-md-12">
+              Fecha de creación:
+              <span class="item">{{ item.date | date: "short" }}</span>
+            </p>
+          </div>
           <article class="btn_cnt">
             <button
               class="btn_cnt-btn_edit"
