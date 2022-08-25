@@ -12,10 +12,6 @@ export class TestService {
    * Array that handles the data of car list.
    */
   dataCarsFake: CarModel[] = [];
-  /**
-   * Array that handles the data of car founder
-   */
-  dataFoundCarFake: CarModel[] = [];
 
   /**
    * Constructor of the component
@@ -48,7 +44,7 @@ export class TestService {
    */
   public deleteCar(id: string): Observable<any> {
     this.dataCarsFake = this.dataCarsFake.filter((item) => item.id !== id);
-    return of(this.dataCarsFake).pipe(delay(2000));
+    return of(this.dataCarsFake).pipe(delay(1000));
   }
 
   /**

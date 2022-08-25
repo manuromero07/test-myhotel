@@ -1,10 +1,15 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Select, Store } from '@ngxs/store';
+import { Observable, Subscription } from 'rxjs';
+import { CreateCar, DeleteCar, EditCar } from 'src/app/actions/car.action';
 import { TypeModalEnum } from 'src/app/enums';
 import { LoadingService, TestService } from 'src/app/services';
 import { CarModel } from 'src/app/shared/models';
 import { ReplaceCurrencyPipe } from 'src/app/utils/pipes/replace-currency.pipe';
+import { GetAllCar } from '../../actions/car.action';
+import { CarState } from '../../states/car.state';
 
 @Component({
   selector: 'app-home',
@@ -13,6 +18,10 @@ import { ReplaceCurrencyPipe } from 'src/app/utils/pipes/replace-currency.pipe';
   providers: [DatePipe, ReplaceCurrencyPipe],
 })
 export class HomeComponent implements OnInit {
+  /**
+   * Store select
+   */
+  @Select(CarState.getCarList) dataCarsFake!: Observable<CarModel[]>;
   /**
    * Formulario de autos
    */
@@ -77,6 +86,8 @@ export class HomeComponent implements OnInit {
    */
   carDataFiltered: CarModel[] = [];
 
+  private formSubscription: Subscription = new Subscription();
+
   /**
    * Constructor del componente
    * @param carService servicio de autos
@@ -84,23 +95,30 @@ export class HomeComponent implements OnInit {
   constructor(
     private carService: TestService,
     private formBuilder: FormBuilder,
-    private loadingService: LoadingService
+    private loadingService: LoadingService,
+    private store: Store
   ) {
     this.initializeSearchform();
-    this.inicializarcarForm();
+    this.initForm();
     this.isModalCreate = false;
     this.showModalDelete = false;
     this.isModalEdit = false;
   }
 
   ngOnInit(): void {
-    this.getCarList();
+    this.formSubscription.add(
+      (this.formSubscription = this.store
+        .dispatch(new GetAllCar())
+        .subscribe(() => {
+          this.getCarList();
+        }))
+    );
   }
 
   /**
    * Método que inicializa el formulario de tasación
    */
-  inicializarcarForm(): void {
+  initForm(): void {
     this.carForm = this.formBuilder.group({
       patent: [
         { value: null, disabled: false },
@@ -185,10 +203,16 @@ export class HomeComponent implements OnInit {
       this.carForm.controls['image'].value
     );
     this.loadingService.show();
-    this.carService.createCar(dataCarCreation).subscribe((resp) => {
+    this.formSubscription.add(
+      (this.formSubscription = this.store
+        .dispatch(new CreateCar(dataCarCreation))
+        .subscribe(() => {
+          this.getCarList();
+        }))
+    );
+    setTimeout(() => {
       this.loadingService.hide();
-      this.getCarList();
-    });
+    }, 1000);
   }
 
   /**
@@ -259,13 +283,16 @@ export class HomeComponent implements OnInit {
       this.carForm.controls['image'].value
     );
     this.loadingService.show();
-    this.carService
-      .editCar(dataCarEdit, String(this.editDataModal.id))
-      .subscribe((resp) => {
-        this.isModalEdit = false;
-        this.getCarList();
-        this.loadingService.hide();
-      });
+    this.formSubscription.add(
+      (this.formSubscription = this.store
+        .dispatch(new EditCar(dataCarEdit, String(this.editDataModal.id)))
+        .subscribe(() => {
+          this.getCarList();
+        }))
+    );
+    setTimeout(() => {
+      this.loadingService.hide();
+    }, 1000);
   }
 
   /**
@@ -296,6 +323,7 @@ export class HomeComponent implements OnInit {
       .deleteCar(String(this.carDataModal.id))
       .subscribe((resp) => {
         this.getCarList();
+        this.store.dispatch(new DeleteCar(String(this.carDataModal.id)));
         this.loadingService.hide();
       });
   }
@@ -341,5 +369,20 @@ export class HomeComponent implements OnInit {
     } else {
       this.carDataFiltered = this.carData;
     }
+  }
+
+  /**
+   * Method that handle what image should be visible when creates a car
+   * @param index position of the item
+   * @returns string img
+   */
+  imgUrl(index: number): string | undefined {
+    let image;
+    if (this.carDataFiltered[index].image) {
+      image = this.carDataFiltered[index].image;
+    } else {
+      image = '../../../assets/images/no_img.png';
+    }
+    return image;
   }
 }

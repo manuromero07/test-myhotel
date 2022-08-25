@@ -16,7 +16,7 @@ El presente manual indica los pasos necesarios para instalar la aplicación de r
   - [Angular Router](https://angular.io/guide/router)
   - [LazyLoading](https://angular.io/guide/lazy-loading-ngmodules)
 - State Management:
-  - [NGXS](No se alcanzo)
+  - [NGXS](https://www.ngxs.io/)
 - otras;
   - [Metodologia BEM](http://getbem.com/)
   - [Icomoon](https://icomoon.io/)
@@ -39,6 +39,10 @@ Las funcionalidades de la aplicación consisten en un CRUD, el cual permite crea
 ### Control y validación de formularios con reactiveForm
 
 Se utilizó Reactive Forms para poder manejar el control de inputs, y validando solamente los requeridos, explicando lo necesitado segun el minimo y maximo de caracter y como se menciona anteriormente si el campo es requerido. El mensaje de error aparecera una vez que hayas ejecutado la acción 'submit' o si seleccionaste un campo y no lo editaste, o en todo caso ingresaste incorrectamente el valor solicitado.
+
+### Manejo de store NGXS
+
+Se implemento NGXS, para realizar el uso de almacenamiento de datos en la aplicacion, funciona de manera que a medida que ejecutemos cualquier acción, como por ejemplo crear un nuevo auto/item, se gatillara una acción 'CrearAuto', la cual sera escuchada por los estados que hemos generado, y procedera a almacenar data en el store designado. Cualquier otra acción como la de editar o eliminar, se vera reflejada en vivo en el store.
 
 ## Development server
 
